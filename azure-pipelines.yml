@@ -36,10 +36,17 @@ steps:
   inputs:
     SourceFolder: 'bin'
     Contents: '**'
-    TargetFolder: 
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'bin'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    OverWrite: true
